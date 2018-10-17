@@ -1,0 +1,4 @@
+//定义查询
+query q_hello {
+  hello
+}
