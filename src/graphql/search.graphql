@@ -1,4 +1,6 @@
-//定义查询
-query q_hello {
+query hello{
   hello
+}
+query qhello{
+  qhello
 }

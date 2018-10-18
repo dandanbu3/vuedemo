@@ -3,7 +3,10 @@
     <div class="apollo">
     <h3>Hello</h3>
     <p>
-      {{$apollo.hello}}
+      {{hello}}
+    </p>
+    <p>
+      {{qHello}}
     </p>
   </div>
   </div>
@@ -11,7 +14,7 @@
 
 <script>
 import gql from 'graphql-tag';
-import {q_hello} from '../graphql/search.graphql';
+import {hello} from '@/graphql/search.graphql';
 const getErSeasons = gql`query erSeasons($classId: Long!) {
                             erSeasons{
                               id
@@ -31,7 +34,9 @@ export default {
     name: 'HelloWorld',
     apollo: {
         // 简单的查询，将更新 'hello' 这个 vue 属性
-        hello: gql`query { hello }`,
+        // hello: gql(`query {
+        //   hello
+        // }`),
         // ping: {
         //     // gql 查询
         //     query: gql`query PingMessage($message: String!) {
@@ -42,12 +47,14 @@ export default {
         //         message: 'Meow',
         //     },
         // },
+        hello: hello
     },
     data () {
         return {
             msg: 'Welcome to Your Vue.js App',
             // hello: '',
             ping: '',
+            qHello: '',
         };
     },
     methods: {
