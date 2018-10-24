@@ -1,6 +1,24 @@
-query hello{
+query hello {
   hello
 }
-query qhello{
+
+query qhello {
   qhello
+}
+
+query QUERY_USER($password: String, $username: String, $page: String) {
+  password(password: $password, page: $page)
+  username(username: $username)
+}
+
+mutation removeUser($id: ID!) {
+  removeUser(id: $id) {
+    id
+    name
+  }
+}
+mutation MUTATION_REMOVE_USER($page: String) {
+  user(page: $page) {
+    id
+  }
 }

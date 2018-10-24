@@ -8,13 +8,17 @@
     <p>
       {{qHello}}
     </p>
+    <button @click="testOne">testOne</button>
+    <div>
+      <button @click="turnpage">turnpage</button>
+    </div>
   </div>
   </div>
 </template>
 
 <script>
 import gql from 'graphql-tag';
-import {hello} from '@/graphql/search.graphql';
+import {hello, MUTATION_REMOVE_USER, QUERY_USER} from '@/graphql/search.graphql';
 const getErSeasons = gql`query erSeasons($classId: Long!) {
                             erSeasons{
                               id
@@ -47,7 +51,8 @@ export default {
         //         message: 'Meow',
         //     },
         // },
-        hello: hello
+        hello: hello,
+        // removeUser: removeUser
     },
     data () {
         return {
@@ -90,6 +95,58 @@ export default {
                 },
             });
             console.log(result);
+        },
+        testOne() {
+            this.$apollo
+                .query({
+                    // Query
+                    query: QUERY_USER,
+                    variables: {
+                        username: 'ducafecat',
+                        password: '12321321321321432',
+                        page: '444'
+                    },
+                })
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+        testTwo() {
+            this.$apollo
+                .mutate({
+                    // Query
+                    mutation: MUTATION_REMOVE_USER,
+                    variables: {
+                        id: 123
+                    }
+                })
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+        turnpage() {
+            this.$apollo
+                .query({
+                    // Query
+                    query: QUERY_USER,
+                    variables: {
+                        username: 'ducafecat',
+                        password: '12321321321321432',
+                        page: '444'
+                    },
+                })
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         }
     }
 };
