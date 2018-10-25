@@ -6,7 +6,7 @@ query qhello {
   qhello
 }
 
-query QUERY_USER($password: String, $username: String, $page: String) {
+query QUERY_USER($password: String, $username: String, $page: Int) {
   password(password: $password, page: $page)
   username(username: $username)
 }
