@@ -8,7 +8,15 @@
     <p>
       {{qHello}}
     </p>
-    <button @click="testOne">testOne</button>
+    <div>
+      <button @click="contentFetch">fetch请求</button>
+    </div>
+    <div>
+      <button @click="testOne">query</button>
+    </div>
+    <div>
+      <button @click="testTwo">mutation</button>
+    </div>
     <div>
       <button @click="turnpage">turnpage</button>
     </div>
@@ -21,7 +29,7 @@
 
 <script>
 import gql from 'graphql-tag';
-import {hello, MUTATION_REMOVE_USER, QUERY_USER, turnPage} from '@/graphql/search.graphql';
+import {hello, QUERY_USER, turnPage, removeUser} from '@/graphql/search.graphql';
 const getErSeasons = gql`query erSeasons($classId: Long!) {
                             erSeasons{
                               id
@@ -125,7 +133,7 @@ export default {
             this.$apollo
                 .mutate({
                     // Query
-                    mutation: MUTATION_REMOVE_USER,
+                    mutation: removeUser,
                     variables: {
                         id: 123
                     }
@@ -138,6 +146,7 @@ export default {
                 });
         },
         turnpage() {
+            console.log(turnPage);
             this.$apollo
                 .query({
                     // Query
@@ -156,6 +165,18 @@ export default {
                 .catch(error => {
                     console.log(error);
                 });
+        },
+        contentFetch() {
+            fetch('http://localhost:4000/graphql', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({query: '{ hello }', variables: {name: 'bob'}})
+            })
+                .then(r => r.json())
+                .then(data => console.log('data returned:', data));
         }
     }
 };
