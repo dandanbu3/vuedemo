@@ -11,6 +11,12 @@ query QUERY_USER($password: String, $username: String, $page: String) {
   username(username: $username)
 }
 
+query turnPage($page: Int, $pageSize: Int) {
+  pageList(page: $page, pageSize: $pageSize) {
+    num
+  }
+}
+
 mutation removeUser($id: ID!) {
   removeUser(id: $id) {
     id

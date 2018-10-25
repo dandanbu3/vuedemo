@@ -12,13 +12,16 @@
     <div>
       <button @click="turnpage">turnpage</button>
     </div>
+    <p v-for="(pageItem, index) in pageList" :key="index">
+      {{pageItem.num}}
+    </p>
   </div>
   </div>
 </template>
 
 <script>
 import gql from 'graphql-tag';
-import {hello, MUTATION_REMOVE_USER, QUERY_USER} from '@/graphql/search.graphql';
+import {hello, MUTATION_REMOVE_USER, QUERY_USER, turnPage} from '@/graphql/search.graphql';
 const getErSeasons = gql`query erSeasons($classId: Long!) {
                             erSeasons{
                               id
@@ -60,6 +63,9 @@ export default {
             // hello: '',
             ping: '',
             qHello: '',
+            page: 1,
+            pageSize: 10,
+            pageList: [],
         };
     },
     methods: {
@@ -104,7 +110,8 @@ export default {
                     variables: {
                         username: 'ducafecat',
                         password: '12321321321321432',
-                        page: '444'
+                        page: this.page,
+                        pageSize: this.pageSize
                     },
                 })
                 .then(response => {
@@ -134,15 +141,17 @@ export default {
             this.$apollo
                 .query({
                     // Query
-                    query: QUERY_USER,
+                    query: turnPage,
                     variables: {
-                        username: 'ducafecat',
-                        password: '12321321321321432',
-                        page: '444'
+                        page: this.page,
+                        pageSize: this.pageSize
                     },
                 })
                 .then(response => {
                     console.log(response);
+                    this.pageList = response.data.pageList;
+                    this.page = this.page + 1;
+                    this.pageSize = this.pageSize + 1;
                 })
                 .catch(error => {
                     console.log(error);
