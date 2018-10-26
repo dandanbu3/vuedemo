@@ -28,7 +28,7 @@
                                             <i class="iconfont font24">&#xe60b;</i>
                                         </a>
                                     </div>
-                                    <div class="song-time">&nbsp;&nbsp;&nbsp;&nbsp;<span @click="showComplain">稿件投诉</span></div>
+                                    <div class="song-time">{{passTime}}&nbsp;&nbsp;&nbsp;&nbsp;<span @click="showComplain">稿件投诉</span></div>
                                     <div class="song-play-num">播放数&nbsp;&nbsp;<span>{{transformPlayNum}}</span></div>
                                     <div class="song-info" :class="infoFoldStatus ? 'song-infoStatus': ''">
                                         <div class="song-info-content" id="song-info-content">
@@ -105,25 +105,6 @@
                                     </div>
                                 </div>
                                 <div v-if="showLrcFoldStatus" class="song-lrcFold" @click="lrcFoldChange">{{lrcText}}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row" v-if="activityInfo.id">
-                        <div class="activity-wrap">
-                            <div class="activity-left">
-                                <div class="l-inside">
-                                    <div class="hinter-msg" :class="activityInfo.ifEnd ? 'act-end' : 'act-start'">
-                                        <b class="text" v-if="!activityInfo.ifEnd">本稿件参加过[{{activityInfo.name}}]</b>
-                                        <b class="text" v-else>本稿件参加过[{{activityInfo.name}}]，活动已结束~</b>
-                                    </div>
-                                    <div v-if="!activityInfo.ifEnd" class="b-btn-praise" @click="voteActivityFunc" :class="activityInfo.ifVoted ? 'voted-btn' : ''">点击投票</div>
-                                </div>
-                            </div>
-                            <div class="activity-right">
-                                <a class="inside-bg" target="_blank" :class="activityInfo.ifEnd ? 'end-act' : false"
-                                    :href="formatUrl(activityInfo.url)"
-                                    :style="{backgroundImage: 'url(' + activityInfo.cover.replace(/http\:/, '') + ')'}">
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -385,7 +366,7 @@ export default {
                 this.title = data.data.songInfo.title;
                 this.avid = data.data.songInfo.aid;
                 this.cid = data.data.songInfo.cid;
-                this.passTime = data.data.songInfo.passtime;
+                this.passTime = data.data.songInfo.time;
                 this.serverTime = data.data.songInfo.curtime;
                 this.playNum = data.data.songInfo.statistic.play;
                 this.collectNum = data.data.songInfo.statistic.collect;
@@ -397,6 +378,7 @@ export default {
                 this.isLock = this.isType(data.data.songInfo.limit, 2);
                 this.isDel = this.isType(data.data.songInfo.limit, 3);
                 this.isVideo = data.data.songInfo.crtype === 3;
+                this.songType = data.data.songInfo.musicType;
                 // 0，付费 1，PGC 2，首发 3，猫耳FM 4，视频转音频
                 this.isPGC = this.isType(data.songInfo.attr, 1);
                 // 活动id

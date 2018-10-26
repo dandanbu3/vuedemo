@@ -74,6 +74,7 @@ export default {
             page: 1,
             pageSize: 10,
             pageList: [],
+            change: false,
         };
     },
     methods: {
@@ -147,13 +148,16 @@ export default {
         },
         turnpage() {
             console.log(turnPage);
+            console.log(this.change);
+            this.change = !this.change;
             this.$apollo
                 .query({
                     // Query
                     query: turnPage,
                     variables: {
                         page: this.page,
-                        pageSize: this.pageSize
+                        pageSize: this.pageSize,
+                        change: this.change
                     },
                 })
                 .then(response => {

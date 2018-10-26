@@ -11,8 +11,8 @@ query QUERY_USER($password: String, $username: String, $page: Int) {
   username(username: $username)
 }
 
-query turnPage($page: Int, $pageSize: Int) {
-  pageList(page: $page, pageSize: $pageSize) {
+query turnPage($page: Int, $pageSize: Int, $change: Boolean!) {
+  pageList(page: $page, pageSize: $pageSize) @include(if: $change) {
     num
   }
 }

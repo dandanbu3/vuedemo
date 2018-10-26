@@ -16,11 +16,24 @@ query getSongInfo ($songId: String) {
     title
     uid
     uname
+    time
+    musicType
+    statistic {
+      collect
+      comment
+      play
+      share
+    }
   }
   msg
 }
 query getUserInfo ($uid: String) {
   code
   userInfo(uid: $uid)
+  msg
+}
+query getIncludeMenuInfo ($songId: String) {
+  code
+  includeList(songId: $songId)
   msg
 }
