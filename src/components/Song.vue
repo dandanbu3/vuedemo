@@ -1479,48 +1479,6 @@ export default {
             }
         }
     }
-    .similar-song-menu {
-        margin-top: 12px;
-        .similar-left {
-            float: left;
-            position: relative;
-            margin-right: 14px;
-            .similar-cover {
-                display: inline-block;
-                background-color: @brown-gray;
-                border-radius: 4px;
-            }
-            .similar-icon {
-                height: 30px;
-                width: 30px;
-                position: absolute;
-                background: url(~image/similar-cover.png) center center no-repeat;
-                background-size: 100%;
-                bottom: 20px;
-                left: 20px;
-            }
-        }
-        .similar-right {
-            float: left;
-            font-size: 12px;
-            line-height: 20px;
-            .title {
-                color: @black;
-                margin: 10px 0;
-                width: 170px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                cursor: pointer;
-                &:hover {
-                    color: @dark-blue;
-                }
-            }
-            .song-num {
-                color: @gray-text-color;
-            }
-        }
-    }
     @media only screen and (min-width: 90em) {
         .song-img {
             width: 370px;
