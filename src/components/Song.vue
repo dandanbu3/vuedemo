@@ -104,7 +104,6 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="song-intro">歌词</div>
                                 <div v-if="showLrcFoldStatus" class="song-lrcFold" @click="lrcFoldChange">{{lrcText}}</div>
                             </div>
                         </div>
