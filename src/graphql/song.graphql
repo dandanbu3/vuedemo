@@ -1,0 +1,26 @@
+query getSongInfo ($songId: String) {
+  code
+  songInfo(songId: $songId) {
+    id
+    lyric
+    cover
+    activityId
+    attr
+    author
+    cid
+    coin_num
+    crtype
+    duration
+    intro
+    limit
+    title
+    uid
+    uname
+  }
+  msg
+}
+query getUserInfo ($uid: String) {
+  code
+  userInfo(uid: $uid)
+  msg
+}

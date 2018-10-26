@@ -21,7 +21,7 @@ module.exports = {
     'generator-star-spacing': 'off',
     'space-before-function-paren': 0,
     'semi': [2, 'always'],
-    'indent': [2, 4, {'SwitchCase': 1}],
+    'indent': [0, 4, {'SwitchCase': 1}],
     'linebreak-style': [2, 'unix'],
     'quotes': [2, 'single'],
     'no-console': 0,
