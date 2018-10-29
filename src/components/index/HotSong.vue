@@ -47,11 +47,18 @@ export default {
     props: ['tableData', 'tableTotal', 'currentPage', 'showStatus'],
     methods: {
         pageChange(currentPage, totalPage) {
-            dao.getUPHotSong({uid: this.upuid, pn: currentPage, ps: 6}).then(data => {
-                if (data) {
-                    this.$emit('changeParent', 'hotSongList', data.data);
-                    this.$emit('changeParent', 'hotSongTotal', data.totalSize);
-                    this.$emit('changeParent', 'hotSongPage', data.curPage);
+          this.$apollo.query({
+              query: dao.getIncludeMenuInfo,
+              variables: {
+                  songId: this.songId,
+                  page: currentPage,
+                  pageSize: 6
+              }
+          }).then(data => {
+                if (data.data) {
+                    this.$emit('changeParent', 'hotSongList', data.data.includeList);
+                    this.$emit('changeParent', 'hotSongTotal', data.data.totalSize);
+                    this.$emit('changeParent', 'hotSongPage', data.data.curPage);
                 }
             }).catch(response => { console.log(response.msg.toString()); });
         },

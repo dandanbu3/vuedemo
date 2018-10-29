@@ -29,11 +29,22 @@ query getSongInfo ($songId: String) {
 }
 query getUserInfo ($uid: String) {
   code
-  userInfo(uid: $uid)
+  userInfo(uid: $uid) {
+    uname
+  }
   msg
 }
-query getIncludeMenuInfo ($songId: String) {
+query getIncludeMenuInfo ($songId: String, $page: Int, $pageSize: Int) {
   code
-  includeList(songId: $songId)
+  includeList(songId: $songId, page: $page, pageSize: $pageSize) {
+    id
+    uid
+    uname
+    title
+    author
+    cover
+  }
+  totalSize
+  curPage(page: $page)
   msg
 }

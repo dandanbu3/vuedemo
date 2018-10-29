@@ -358,7 +358,6 @@ export default {
                 },
             }).then(data => {
                 // this.songId = data.songInfo.aid;
-                console.log(data);
                 this.author = data.data.songInfo.author;
                 this.cover = data.data.songInfo.cover;
                 this.intro = data.data.songInfo.intro;
@@ -380,28 +379,40 @@ export default {
                 this.isVideo = data.data.songInfo.crtype === 3;
                 this.songType = data.data.songInfo.musicType;
                 // 0，付费 1，PGC 2，首发 3，猫耳FM 4，视频转音频
-                this.isPGC = this.isType(data.songInfo.attr, 1);
+                this.isPGC = this.isType(data.data.songInfo.attr, 1);
                 // 活动id
-                this.activityInfo.id = data.activityId;
-                this.$apollo.query({
-                    query: dao.getUserInfo,
-                    variables: {
-                        uid: this.upuid
-                    }
-                  }).then(data => {
-                    this.upcover = data.avater;
-                    this.upintro = data.sign;
-                    this.$nextTick(function() {
-                        var follow = document.getElementById('follow-content');
-                        if (follow && follow.offsetHeight > 48) {
-                            this.showFollowFold = true;
-                        }
-                    });
-                }).catch(response => { this.SETFOLLOWSTATUS(false); });
+                this.activityInfo.id = data.data.songInfo.activityId;
+                // this.$apollo.query({
+                //     query: dao.getUserInfo,
+                //     variables: {
+                //         uid: this.upuid
+                //     }
+                //   }).then(data => {
+                //     this.upcover = data.avater;
+                //     this.upintro = data.sign;
+                //     this.$nextTick(function() {
+                //         var follow = document.getElementById('follow-content');
+                //         if (follow && follow.offsetHeight > 48) {
+                //             this.showFollowFold = true;
+                //         }
+                //     });
+                // }).catch(response => { this.SETFOLLOWSTATUS(false); });
                 // 获取所属歌单信息
-                dao.getIncludeMenuInfo(this.songId).then(data => {
-                    this.includeAlbumObj = data;
-                });
+                this.$apollo.query({
+                    query: dao.getIncludeMenuInfo,
+                    variables: {
+                        songId: this.songId,
+                        page: 1,
+                        pageSize: 6
+                    }
+                }).then(data => {
+                    console.log(data.data.includeList);
+                    this.hotSongList = data.data.includeList;
+                    this.hotSongTotal = data.data.totalSize;
+                    this.hotSongPage = data.data.curPage;
+                    this.showHotSongStatus = true;
+                }).catch(response => { console.log('false'); });
+                console.log(222);
                 if (this.isPGC === '1') {
                     this.intro = '该歌曲为付费歌曲，目前仅支持收听试听片段，请静候更多功能上线。';
                 } else if (this.isVideo) {
