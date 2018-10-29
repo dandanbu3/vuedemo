@@ -48,3 +48,9 @@ query getIncludeMenuInfo ($songId: String, $page: Int, $pageSize: Int) {
   curPage(page: $page)
   msg
 }
+
+mutation changeCollectStatus($check: Boolean, $songId: String) {
+  collectStatus(check: $check, songId: $songId)
+  code
+  msg
+}

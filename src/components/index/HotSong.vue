@@ -53,7 +53,8 @@ export default {
                   songId: this.songId,
                   page: currentPage,
                   pageSize: 6
-              }
+              },
+              fetchPolicy: 'network-only'
           }).then(data => {
                 if (data.data) {
                     this.$emit('changeParent', 'hotSongList', data.data.includeList);

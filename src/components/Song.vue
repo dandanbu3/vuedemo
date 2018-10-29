@@ -270,7 +270,7 @@ export default {
             trimHttp,
             upuid: '',
             upname: '',
-            songcollect: '',
+            songcollect: false,
             playcurrentstatus: '',
             followstatus: '',
             paycoinnumber: '',
@@ -523,15 +523,33 @@ export default {
             this.shareDialogStatus = true;
         },
         colloctSong() {
-            window.getCollectionList(this.$route.params.songId, () => {
-                this.SETSONGCOLLECT(true);
-                this.collectNum = this.collectNum + 1;
-                window.ap.loadCollectionStatus(this.$route.params.songId);
-            }, () => {
-                this.SETSONGCOLLECT(false);
-                this.collectNum = this.collectNum - 1;
-                window.ap.loadCollectionStatus(this.$route.params.songId);
+            this.$apollo.mutate({
+                mutation: dao.changeCollectStatus,
+                variables: {
+                    songId: '41222',
+                    check: this.songcollect
+                }
+            }).then(data => {
+                console.log(data);
+                if (this.songcollect) {
+                    showToast('取消收藏成功');
+                    this.songcollect = false;
+                } else {
+                    showToast('收藏成功');
+                    this.songcollect = true;
+                }
+            }).catch(response => {
+                console.log(false);
             });
+            // window.getCollectionList(this.$route.params.songId, () => {
+            //     this.SETSONGCOLLECT(true);
+            //     this.collectNum = this.collectNum + 1;
+            //     window.ap.loadCollectionStatus(this.$route.params.songId);
+            // }, () => {
+            //     this.SETSONGCOLLECT(false);
+            //     this.collectNum = this.collectNum - 1;
+            //     window.ap.loadCollectionStatus(this.$route.params.songId);
+            // });
         },
         scrollFunction() {
             var height = document.body.clientHeight;
