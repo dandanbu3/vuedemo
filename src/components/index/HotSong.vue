@@ -21,9 +21,9 @@ import {showToast} from 'components/toast';
 export default {
     data () {
         return {
-          upuid: '',
-          upname: '',
-          hotsongplayInfo: '',
+            upuid: '',
+            upname: '',
+            hotsongplayInfo: '',
         };
     },
     components: {
