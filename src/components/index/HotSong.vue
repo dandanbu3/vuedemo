@@ -25,6 +25,8 @@ export default {
           upname: '',
           hotsongplayInfo: '',
           test2: '',
+          test1: '',
+
         };
     },
     components: {
