@@ -24,7 +24,6 @@ export default {
           upuid: '',
           upname: '',
           hotsongplayInfo: '',
-          test1: '',
         };
     },
     components: {
