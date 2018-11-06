@@ -6,7 +6,7 @@
                     <div class="row">
                         <div class="col-6-med col-5">
                             <div>
-                                <div><img class="song-img" :src="trimHttp(formatImg(cover, 370, 370))"></div>
+                                <div><img class="song-img" :src="cover"></div>
                                 <div class="song-intro">简介</div>
                                 <div class="song-content" :class="introFoldStatus ? 'song-fold': ''">
                                     <div id="content-span" class="content-span">{{intro}}</div>
