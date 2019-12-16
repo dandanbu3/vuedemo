@@ -177,7 +177,7 @@ export default {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
                 },
-                body: JSON.stringify({query: '{ hello }', variables: {name: 'bob'}})
+                body: JSON.stringify({query: 'query { hello }', variables: {name: 'bob'}})
             })
                 .then(r => r.json())
                 .then(data => console.log('data returned:', data));

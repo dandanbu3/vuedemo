@@ -9,6 +9,7 @@ query qhello {
 query QUERY_USER($password: String, $username: String, $page: Int) {
   password(password: $password, page: $page)
   username(username: $username)
+  ...test
 }
 
 query turnPage($page: Int, $pageSize: Int, $change: Boolean!) {
@@ -27,4 +28,10 @@ mutation MUTATION_REMOVE_USER($page: String) {
   user(page: $page) {
     id
   }
+}
+fragment test on Hello {
+  hello
+}
+query Hello {
+  hello
 }
