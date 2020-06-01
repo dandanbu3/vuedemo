@@ -14,7 +14,7 @@ import VueApollo from 'vue-apollo';
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
-
+console.log(222)
 const httpLink = new HttpLink({
     // 你需要在这里使用绝对路径
     uri: 'http://localhost:4000/graphql',
