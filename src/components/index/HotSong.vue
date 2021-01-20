@@ -115,6 +115,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+
     @import '../../assets/style/color.less';
     .song-title {
         font-size: 18px;
